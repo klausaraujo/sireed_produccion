@@ -1,0 +1,8 @@
+application/logs/
+public/avisos/
+application/.env
+application/libraries/assets/
+application/cache
+public/tablero/
+public/files/
+public/images/eventos/

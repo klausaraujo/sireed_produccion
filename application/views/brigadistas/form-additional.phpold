@@ -1,0 +1,1589 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title><?=TITULO_PRINCIPAL?></title>
+      <meta name="author" content="<?=AUTOR?>">
+     
+      <!-- Favicon -->
+      <link rel="shortcut icon" href="<?=base_url()?>public/images/favicon.jpg">
+      <link rel="icon" href="<?=base_url()?>public/images/favicon.jpg" type="image/x-icon">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="<?=base_url()?>public/template/css/bootstrap.min.css">
+      <!-- Typography CSS -->
+      <link rel="stylesheet" href="<?=base_url()?>public/template/css/typography.css">
+      <!-- Style CSS -->
+      <link rel="stylesheet" href="<?=base_url()?>public/template/css/style.css">
+      <!-- Responsive CSS -->
+      <link rel="stylesheet" href="<?=base_url()?>public/template/css/responsive.css">
+
+   
+<!-- Data table CSS -->
+<!-- <link href="<?=base_url()?>public/css/datatables.min.css" rel="stylesheet" type="text/css"> -->
+<link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+<link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css">
+
+
+
+<!-- Data table CSS -->
+<!-- <link href="<?=base_url()?>public/css/datatables.min.css" rel="stylesheet" type="text/css"> -->
+
+
+
+   </head>
+   <body>
+      <!-- loader Start -->
+      <div id="loading">
+         <div id="loading-center">
+         </div>
+      </div>
+      <!-- loader END -->
+      <!-- Wrapper Start -->
+      <div class="wrapper">
+
+      <!-- Sidebar  -->
+      <?php $this->load->view("inc/nav-template"); ?>
+
+
+         <!-- Page Content  -->
+         <div id="content-page" class="content-page">
+            <!-- TOP Nav Bar -->
+            <?php $this->load->view("inc/nav-top-template"); ?>
+            <!-- TOP Nav Bar END -->
+            
+            <div class="container-fluid">
+               <div class="row">
+
+                  
+                  <div class="clearfix"></div>
+
+                 
+                  <br>
+               
+                  <div class="col-lg-12">
+                    <?php //echo '<pre>'; var_dump($hospitales); 
+                    ?>
+                     <br>
+                 
+                     <div class="iq-card"> 
+                        <!-- <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 class="card-title">Registrar de la ficha de evaluación de situación de los servicios de Emergencia</h4>
+                           </div>
+                        </div> -->
+                        <!-- <div class="container"> -->
+
+                        <div style="background-color:#089eaf" class="alert alert-primary" role="alert">
+<a style="color:white; text-align: center" class="alert-link">
+  <b> REGISTRO DE INFORMACIÓN ADICIONAL </b> </a>
+</div>
+                        
+
+                        <div class="iq-card-body">
+                       
+                              <br>
+
+
+                              <div class="row">
+                                 <!--  -->
+                                 <div id="message" class="col-xs-12"></div>
+                              </div>   
+
+                              <ul class="nav nav-tabs" id="hospital__tabs" role="tablist">
+                                 <li class="nav-item">
+                                    <a class="nav-link active" id="tab-1" 
+                                                               href="#tab1" 
+                                                               aria-controls="tab1" data-toggle="tab"  role="tab"  aria-selected="true">
+                                   Idiomas Adicionales
+                                 </a>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" id="tab-2" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">
+                                    Información Profesional y Certificaciones</a>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" id="tab-3" 
+                                                         href="#tab3" 
+                                                         aria-controls="tab3" data-toggle="tab"  role="tab"  aria-selected="false">
+                                    Información Laboral
+                                 </a>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" id="tab-4" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">
+                                    Salud e Inmunizaciones
+                                 </a>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" id="tab-5" data-toggle="tab" href="#tab5" role="tab" aria-controls="tab5" aria-selected="false">
+                                    Capacitaciones y Cursos
+                                 </a>
+                                 </li>
+                              </ul>
+                              <br>
+
+                              
+
+                              <input type="hidden" id="id" name="id" value="<?=$id?>">
+                             
+                              <div class="tab-content" id="myTabContent-2">
+                                 <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab-1">
+                                 
+                                    <div class="row"> 
+                                    <span class="mb-4"><b>IDIOMA:</b></span>
+                                    </div>
+
+                                    <form id="formIdioma" name="formIdioma" method="POST" action="" autocomplete="off">
+                                    <div class="row"> 
+                                       
+                                      
+
+                                       <div class="col-md-3">
+                                          <div class="form-group">
+                                          <label>Adicionar lengua: </label>
+                                          <select class="form-control" name="ididioma" id="ididioma">
+                                             <?php foreach($listaIdiomas as $row): ?>
+                                             <option value="<?=$row->id?>"><?=$row->idioma?></option>
+                                             <?php endforeach; ?>
+                                          </select>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-3">
+                                          <div class="form-group">
+                                             <label>Nivel: </label>
+                                             <select class="form-control" name="nivel" id="nivel">
+                                                <!--<option value="">-- SELECCIONE --</option>-->
+                                                <option value="1">BÁSICO</option>
+                                                <option value="2">INTERMEDIO</option>
+                                                <option value="3">AVANZADO</option>
+                                                <option value="4">EXPERTO</option> 
+                                             </select>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-2">
+                                          <div class="form-group">
+                                             <label for="lectura"> Lectura </label>
+                                             <input style="width: 10%;" type="checkbox" class="form-control" id="lectura" name="lectura"> 
+                                             
+                                          </div>
+                                       </div> 
+
+                                       <div class="col-md-2">
+                                          <div class="form-group">
+                                             <label for="escritura">Escritura </label>
+                                             <input style="width: 10%;" type="checkbox" class="form-control" id="escritura" name="escritura">
+                                             
+                                          </div>
+                                       </div>    
+                                       <div class="col-md-3">
+                                          <div class="form-group">  
+                                             <button type="submit" class="btn btn-primary btn-block">Añadir registro</button>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-3">
+                                          <div class="form-group">  
+                                          <a href="<?=base_url()?>brigadistas" class="col-12 btn btn-primary" role="button" aria-pressed="true">Cancelar registro</a>
+                                          </div>
+                                       </div>  
+
+                                       <div class="col-md-12 text-center" id="cargando"></div>
+
+                                      
+                                    </div>
+                                    </form>
+                                 
+
+                                 
+                                           
+                                    <div class="row"> 
+
+                                       <div class="col-xl-12 col-md-12">
+                                          <div class="card m-b-30 pb-35">
+                                             <div class="card-body">
+                                                <h4 class="mt-0 m-b-15 header-title">Lista General de Idiomas Registrados</h4>
+                                                <br>
+                                                <div class="table-responsive">
+                                                   <table id="tablaIdioma"  class="tablaIdioma table table-hover mb-0">
+                                                   <thead>
+                                                      <tr>
+                                                         <th>Accion</th>
+                                                         <th>Idioma</th> 
+                                                         <th>Nivel</th>
+                                                         <th>Lectura</th>
+                                                         <th>Escritura</th> 
+                                                         <th>Estado</th>
+                                                         
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                   </tbody>
+                                                   </table> 
+
+                                                </div>
+
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!--  </div> -->
+
+                                          
+                                    </div>
+                                    
+                                
+                                 </div>
+                                
+                                 
+                                 
+                              <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab-2">
+                                 <div class="row"> 
+                                       <h4 class="mb-4"> REGISTRO DE CARRERAS (PROFESIONALES Y TECNICOS) :</h4>
+                                    
+                                 </div>
+                                 <form id="formCarrera" name="formCarrera" method="POST" action="" autocomplete="off" enctype="multipart/form-data">                      
+                                 <div class="row">
+                                    <!--  <input type="hidden" id="id" name="id" value="<?=$id?>"> -->
+                                    <label class="span__bold" style="display:block; width:100%">
+                                       <b>   CARRERAS </b>
+                                    </label>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                       <label for="idprofesion">Carrera:</label>
+                                       <select class="form-control" name="idprofesion" id="idprofesion">
+                                          <option value="">--Seleccione Profesión--</option>
+                                          <?php foreach($listaRProfesion as $row): ?>
+                                          <option value="<?=$row->idprofesion?>"><?=$row->profesion?></option>
+                                          <?php endforeach; ?>
+                                       </select>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                       <label for="idespecialidad">Especialidad:</label>
+                                       <select class="form-control" name="idespecialidad" id="idespecialidad">
+                                             <option value=""> -- Seleccione Profesión -- </option>
+                                          
+                                       </select>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          <label for="colegiatura">Colegiadora: </label>
+                                          <input type="text" class="form-control" name="colegiatura" id="colegiatura" value="0"/> 
+                                       </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                       <div class="form-group">
+                                          <label for="rne">RNE: </label>
+                                          <input type="text" maxlength="100" class="form-control" name="rne" id="rne" value="0" /> 
+                                       </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                       <div class="form-group">
+                                       <label for="activo"> Activo </label>
+                                          <input style="width: 40%;" type="checkbox" class="form-control" id="activo" name="activo">
+                                       </div>
+                                    </div>
+
+
+                                    <label class="span__bold" style="display:block; width:100%">
+                                       <b>  </b>
+                                       </label>
+                                       <!-- <<input type="file" name="file1" id="file1"  > -->
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                       <br><br>
+                                       <input type="file" class="custom-file-input" id="file_titulo" name="file_titulo" lang="es">
+                                          <label class="custom-file-label" for="file_titulo">Cargar Archivo (Título)</label>
+                                          
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          
+                                       <input type="file" class="custom-file-input" id="file_especialidad" name="file_especialidad" lang="es">
+                                       <label class="custom-file-label" for="file_especialidad">Cargar Archivo (Especialidad)</label>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                       
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-check">
+                                       
+                                       
+                                       </div>
+                                    </div> 
+
+                                    <label class="span__bold" style="display:block; width:100%">
+                                       <b>  </b>
+                                       </label>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          <label> </label>
+                                          
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          <label> </label> 
+                                          <button type="submit" class="btn btn-primary btn-block">Añadir registro</button>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          <label></label> 
+                                          <!-- <button type="button" class="btn btn-primary btn-block">Cancelar registro</button> -->
+                                          <a href="<?=base_url()?>brigadistas" class="col-12 btn btn-primary" role="button" aria-pressed="true">Cancelar registro</a>
+
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-check">
+                                       
+                                       
+                                       </div>
+                                    </div>  
+
+                              <div class="col-md-12 text-center" id="cargando"></div>
+
+                                 </div>            
+                                 </form>           
+
+                                    <div class="card-body">
+                                       <h4 class="mt-0 m-b-15 header-title">LISTADO DE CARRERAS REGISTRADAS</h4>
+                                       <br>
+                                       <div class="table-responsive">
+
+                                          <!-- tabla carrera -->
+                                          <table  id="tablaCarrera" class="tablaCarrera table table-hover mb-0">
+                                          <thead>
+                                             <tr>
+                                                <th>Acciones</th>
+                                                <th>ID</th> 
+                                                <th>Carrera</th>
+                                                <th>Especialidad</th>
+                                                <th>Colegiatura</th>
+                                                <th>RNE</th>
+                                                <th>Titulo</th>
+                                                <th>Especialidad</th>
+                                                <th>Estado</th>
+                                             
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                          </tbody>
+                                          </table>
+
+                                         
+
+                                       </div> 
+                                    </div>
+                                    
+                                    <br><br>    
+
+                                 <form id="formCertificado" name="formCertificado" method="POST" action="" autocomplete="off">               
+                                 <div class="row"> 
+
+                                    <label class="span__bold" style="display:block; width:100%">
+                                       <b>   REGISTRO DE CERTIFICACIONES </b>
+                                    </label>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          <label for="idinstitucion">INSTITUCION:</label>
+                                          <select class="form-control" id="idinstitucion" name="idinstitucion" placeholder="Institución">                                        
+                                             <?php foreach($listaInstituciones as $row): ?>
+                                                <option value="<?=$row->id?>"><?=$row->nombre?></option>
+                                                <?php endforeach; ?>
+                                             </select>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                       <label for="idcertificacion">Tipo de certificación:</label>
+                                       <select class="form-control" name="idcertificacion" id="idcertificacion">
+                                             <option value="1">BRIGADISTA</option>
+                                             <option value="2">E.M.T. I</option>
+                                             <option value="3">E.M.T. II</option>
+                                             <option value="4">E.M.T. III</option>
+                                             <option value="5">RESCATISTA</option>
+                                             <option value="6">MÉDICO TÁCTICO</option>
+                                       </select>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          <label for="fecha_inicio">Fecha de emisión: </label>
+                                          <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio"/> 
+                                       </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                       <div class="form-group">
+                                          <label for="fecha_vigencia">Fecha de Vigencia: </label>
+                                          <input type="date" class="form-control" name="fecha_vigencia" id="fecha_vigencia"/> 
+                                       </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                       <div class="form-group">
+                                       <label for="activo1"> Activo </label>
+                                           <input style="width: 40%;" type="checkbox" class="form-control" id="activo" name="activo"> 
+                                       </div>
+                                    </div>
+
+                                    <label class="span__bold" style="display:block; width:100%">
+                                       <b>  </b>
+                                    </label>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          
+                                       <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                                       <label class="custom-file-label" for="customFileLang">Adjuntar Resolución</label><br><br>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                       
+                                          
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-check">
+                                       
+                                    
+                                       </div>
+                                    </div>  
+
+                                    <label class="span__bold" style="display:block; width:100%">
+                                       <b>  </b>
+                                    </label>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          <label> </label>
+                                          
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          <label> </label>
+                                          <button type="submit" class="btn btn-primary btn-block">Añadir registro</button>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-group">
+                                          <label></label>
+                                          <a href="<?=base_url()?>brigadistas" class="col-12 btn btn-primary" role="button" aria-pressed="true">Cancelar registro</a>
+
+                                       </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                       <div class="form-check">
+                                       </div>
+                                    </div>              
+
+
+
+                                 </div>  
+                                 </form>
+
+                                 <div class="row"> 
+                                    <div class="col-xl-12 col-md-12">
+                                       <div class="card m-b-30 pb-35">
+                                          <div class="card-body">
+                                             <h4 class="mt-0 m-b-15 header-title">LISTADO DE CERTIFICACIONES REGISTRADAS</h4>
+                                             <br>
+                                             <div class="table-responsive">
+
+                                             <!-- tabla certificado -->
+                                             <table id="tablaCertificado" class="tablaCertificado table table-hover mb-0">
+                                                <thead>
+                                                   <tr>
+                                                      <th>Acciones</th> 
+                                                      <th>ID</th>
+                                                      <th>Institución</th>
+                                                      <th>F.Emisión</th>
+                                                      <th>F.Vencimiento</th>
+                                                      <th>Adjunto</th>
+                                                      <th>Estado</th>
+                                                   
+                                                   
+                                                   </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                                </table>
+                                             </div>
+
+                                          </div>
+                                       </div>
+                                    </div>
+
+
+                                 </div>
+
+                              </div>
+
+                              <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab-3">
+                                 <div class="row"> 
+                                       <h4 class="mb-4"> INFORMACIÓN LABORAL :</h4>
+                                    
+                                 </div>
+
+                                 <form name="formLaboral" id="formLaboral" method="POST" action="" autocomplete="off">
+                                  
+                                    <div class="form-group row">
+                                       <label for="codigo_institucion" class="col-sm-4 col-form-label">Institución</label>
+                                       <div class="col-sm-8">
+                                          <select class="form-control" name="codigo_institucion" id="codigo_institucion">
+                                             <option value="0">-- Seleccione --</option>
+                                                <?php foreach ($listarInstitucion->result() as $row): ?>
+                                                <option value="<?=$row->codigo_institucion?>">
+                                                <?=$row->nombre_institucion?>
+                                                </option>
+                                                <?php endforeach;?>
+                                          </select>
+                                       </div>
+                                    </div>
+
+                                     <div class="form-group row">
+                                       <label for="codigo_region" class="col-sm-4 col-form-label">Región</label>
+                                       <div class="col-sm-8">
+                                       <select class="form-control" name="codigo_region" id="codigo_region">
+                                          <option value="0">-- Seleccione --</option>
+                                             <?php foreach ($listarRegion->result() as $row): ?>
+                                             <option value="<?=$row->codigo_region?>">
+                                             <?=$row->nombre_region?>
+                                             </option>
+                                             <?php endforeach;?>
+                                       </select>
+                                       </div>
+                                    </div>      
+
+                                     <div class="form-group row">
+                                       <label for="codigo_disa" class="col-sm-4 col-form-label">DISA/DIRESA</label>
+                                       <div class="col-sm-8">
+                                       <select class="form-control" name="codigo_disa" id="codigo_disa">
+                                          <option value="0">-- Seleccione --</option>
+                                       </select>
+                                       </div>
+                                    </div>    
+
+                                    <div class="form-group row">
+                                       <label for="codigo_red" class="col-sm-4 col-form-label">Red</label>
+                                       <div class="col-sm-8">
+                                       <select class="form-control" name="codigo_red" id="codigo_red">
+                                          <option value="0">-- Seleccione --</option>
+                                       </select>
+                                       </div>
+                                    </div>  
+
+                                    <div class="form-group row">
+                                       <label for="codigo_micro_red" class="col-sm-4 col-form-label">Micro Red</label>
+                                       <div class="col-sm-8">
+                                       <select class="form-control" name="codigo_micro_red" id="codigo_micro_red">
+                                          <option value="0">-- Seleccione --</option>
+                                       </select>
+                                       </div>
+                                    </div> 
+
+                                    <div class="form-group row">
+                                       <label for="codigo_renipress" class="col-sm-4 col-form-label">IPRESS</label>
+                                       <div class="col-sm-8">
+                                       <select class="form-control" name="codigo_renipress" id="codigo_renipress">
+                                          <option value="0">-- Seleccione --</option>
+                                       </select>
+                                       </div>
+                                    </div> 
+
+                                    <div class="form-group row">
+                                       <label for="codigo_condicion" class="col-sm-4 col-form-label">Condición Laboral</label>
+                                       <div class="col-sm-8">
+                                       <select class="form-control" name="codigo_condicion" id="codigo_condicion">
+                                          <option value="0">-- Seleccione --</option>
+                                          <option value="1">CAS</option>
+                                          <option value="2">Régimen 276</option>
+                                          <option value="3">Régimen 728</option>
+                                          <option value="4">PAC</option>
+                                          <option value="5">FAG</option>
+                                          <option value="6">PNUD</option>
+                                          <option value="7">Altos Funcionarios</option>
+                                          <option value="8">Pensionistas</option>
+                                          <option value="9">Ley Servir</option>
+                                          <option value="10">Locador</option>
+                                          <option value="11">Otros</option>
+                                       </select>
+                                       </div>
+                                    </div> 
+                                    <div class="form-group row">
+                                       
+                                       <div class="col-sm-6">
+                                       <button type="submit" class="col-6 btn btn-primary">Guardar Registro </button>
+                                       </div>
+                                       <div class="col-sm-6">
+                                       <a href="<?=base_url()?>brigadistas" class="col-6 btn btn-primary" role="button" aria-pressed="true">Cancelar</a>
+                                       </div>
+                                    </div> 
+
+                                 </form>
+                              </div>
+                                     
+                              </div><!-- end-tab -->
+      
+                        </div>
+
+            <!-- Footer -->
+            <?php $this->load->view("inc/footer-template"); ?>
+            <!-- Footer END -->
+         </div>
+      </div>
+      <!-- Wrapper END -->
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="<?=base_url()?>public/template/js/jquery.min.js"></script>
+      <script src="<?=base_url()?>public/template/js/popper.min.js"></script>
+      <script src="<?=base_url()?>public/template/js/bootstrap.min.js"></script>
+      <!-- Appear JavaScript -->
+      <script src="<?=base_url()?>public/template/js/jquery.appear.js"></script>
+      <!-- Countdown JavaScript -->
+      <script src="<?=base_url()?>public/template/js/countdown.min.js"></script>
+      <!-- Counterup JavaScript -->
+      <script src="<?=base_url()?>public/template/js/waypoints.min.js"></script>
+      <script src="<?=base_url()?>public/template/js/jquery.counterup.min.js"></script>
+      <!-- Wow JavaScript -->
+      <script src="<?=base_url()?>public/template/js/wow.min.js"></script>
+      <!-- Apexcharts JavaScript -->
+      <script src="<?=base_url()?>public/template/js/apexcharts.js"></script>
+      <!-- Slick JavaScript -->
+      <script src="<?=base_url()?>public/template/js/slick.min.js"></script>
+      <!-- Select2 JavaScript -->
+      <script src="<?=base_url()?>public/template/js/select2.min.js"></script>
+      <!-- Owl Carousel JavaScript -->
+      <script src="<?=base_url()?>public/template/js/owl.carousel.min.js"></script>
+      <!-- Magnific Popup JavaScript -->
+      <script src="<?=base_url()?>public/template/js/jquery.magnific-popup.min.js"></script>
+      <!-- Smooth Scrollbar JavaScript -->
+      <script src="<?=base_url()?>public/template/js/smooth-scrollbar.js"></script>
+      <!-- lottie JavaScript -->
+      <script src="<?=base_url()?>public/template/js/lottie.js"></script>
+      <!-- Chart Custom JavaScript -->
+      <script src="<?=base_url()?>public/template/js/chart-custom.js"></script>
+      <!-- Custom JavaScript -->
+      <script src="<?=base_url()?>public/template/js/custom.js"></script>
+
+      
+<!-- Data table JavaScript -->
+<!-- <script src="<?=base_url()?>public/js/datatables.min.js"></script> -->
+
+<script src="<?=base_url()?>public/js/jquery.validate.min.js"></script>
+
+<!-- Data table JavaScript -->
+
+<!-- <script src="<?=base_url()?>public/js/datatables.min.js"> -->
+  
+</script>
+<!-- Data table JavaScript -->
+<!-- <script src="<?=base_url()?>public/js/datatables.min.js"></script>                                     -->
+<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> 
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js "></script> 
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js "></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js "></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js "></script> 
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js "></script> 
+
+
+   <script>
+      const URI_MAP = "<?=base_url()?>";
+      const URI = "<?=base_url()?>";
+      const canDelete = "1";
+      const canEdit = "1";
+      const canTracking = "1";
+      const canHistory = "1"; 
+      
+      /* const listaIdiomasPersonal = <=$listaIdiomasPersonal?>;  */ 
+      var table, tablaCarrera,tablaCertificado;
+
+      const path_files =<?php echo "'".$path_files."'"; ?>;
+   </script>
+ 
+     <script>
+         	$("#formLaboral select[name=codigo_region]").on("change", function () {
+			var id = $(this).val();
+		
+			//var anio = $("#formLaboral").find("select[name=Anio_Ejecucion]").val();
+				//if (id.length > 0 && anio) {
+					cargarDISA($("#formLaboral"), 1, 0, id);
+					// filterAreaByYear("#formLaboral", id);
+				//}
+		  });
+
+
+
+		  function cargarDISA(form, select, codigo_disa, codigo_region) {
+			var id_disa = codigo_disa;
+			$.ajax({
+				url: URI + 'contingencia/Main/cargarDISA',
+				method: 'post',
+				type: 'json',
+				data: { codigo_disa: codigo_disa, codigo_region },
+				error: function (xhr) { },
+				beforeSend: function () {
+					$(form).find("select[name=codigo_disa]").html('<option value="">Cargando...</option>');
+				},
+				success: function (data) {
+					//console.log('here', data)
+					$(form).find("select[name=codigo_disa]").html('<option value="0">-- Seleccione --</option>');
+					data = JSON.parse(data);
+					$.each(data, function (i, e) {
+						if (parseInt(codigo_disa) > 0) { $(form).find("select[name=codigo_disa]").append('<option value="' + e.codigo_disa + '"' + (id_disa == e.codigo_disa ? 'selected' : "") + '>' + e.codigo_disa + ' - ' + e.nombre_disa + '</option>'); }
+						else { $(form).find("select[name=codigo_disa]").append('<option value="' + e.codigo_disa + '">' + e.codigo_disa + ' - ' + e.nombre_disa + '</option>'); }
+					});
+	
+				}
+			});
+	
+		}   
+
+
+
+      	$("#formLaboral select[name=codigo_disa]").on("change", function () {
+			var id = $(this).val();
+		
+			//var anio = $("#formLaboral").find("select[name=Anio_Ejecucion]").val();
+				//if (id.length > 0 && anio) {
+					cargarRed($("#formLaboral"), 1, 0, id);
+					// filterAreaByYear("#formLaboral", id);
+				//}
+		  });
+
+		  function cargarRed(form, select, codigo_red, codigo_disa) {
+			var id_red = codigo_red;
+			$.ajax({
+				url: URI + 'contingencia/Main/cargarRed',
+				method: 'post',
+				type: 'json',
+				data: { codigo_red: codigo_red, codigo_disa },
+				error: function (xhr) { },
+				beforeSend: function () {
+					$(form).find("select[name=codigo_red]").html('<option value="">Cargando...</option>');
+				},
+				success: function (data) {
+					//console.log('here', data)
+					$(form).find("select[name=codigo_red]").html('<option value="0">-- Seleccione --</option>');
+					data = JSON.parse(data);
+					$.each(data, function (i, e) {
+						if (parseInt(codigo_red) > 0) { $(form).find("select[name=codigo_red]").append('<option value="' + e.codigo_red + '"' + (id_red == e.codigo_red ? 'selected' : "") + '>' + e.codigo_red + ' - ' + e.nombre_red + '</option>'); }
+						else { $(form).find("select[name=codigo_red]").append('<option value="' + e.codigo_red + '">' + e.codigo_red + ' - ' + e.nombre_red + '</option>'); }
+					});
+	
+				}
+			});
+	
+		}
+
+      $("#formLaboral select[name=codigo_red]").on("change", function () {
+			var id = $(this).val();
+			var disa = $("#formLaboral").find("select[name=codigo_disa]").val();
+			//var anio = $("#formLaboral").find("select[name=Anio_Ejecucion]").val();
+				//if (id.length > 0 && anio) {
+					cargarMicroRed($("#formLaboral"), 1, 0, id, disa);
+					// filterAreaByYear("#formLaboral", id);
+				//}
+		  });
+
+		  function cargarMicroRed(form, select, codigo_micro_red, codigo_red,codigo_disa) {
+			var id_microred = codigo_micro_red;
+			$.ajax({
+				url: URI + 'contingencia/Main/cargarMicroRed',
+				method: 'post',
+				type: 'json',
+				data: { codigo_micro_red: codigo_micro_red, codigo_red, codigo_disa: codigo_disa },
+				error: function (xhr) { },
+				beforeSend: function () {
+					$(form).find("select[name=codigo_micro_red]").html('<option value="">Cargando...</option>');
+				},
+				success: function (data) {
+					//console.log('here', data)
+					$(form).find("select[name=codigo_micro_red]").html('<option value="0">-- Seleccione --</option>');
+					data = JSON.parse(data);
+					$.each(data, function (i, e) {
+						if (parseInt(codigo_micro_red) > 0) { $(form).find("select[name=codigo_micro_red]").append('<option value="' + e.codigo_micro_red + '"' + (id_microred == e.codigo_micro_red ? 'selected' : "") + '>' + e.codigo_micro_red + ' - ' + e.nombre_micro_red + '</option>'); }
+						else { $(form).find("select[name=codigo_micro_red]").append('<option value="' + e.codigo_micro_red + '">' + e.codigo_micro_red + ' - ' + e.nombre_micro_red + '</option>'); }
+					});
+	
+				}
+			});
+	
+		}
+
+      $("#formLaboral select[name=codigo_micro_red]").on("change", function () {
+			var id = $(this).val();
+			var institucion = $("#formLaboral").find("select[name=codigo_institucion]").val();
+			var region = $("#formLaboral").find("select[name=codigo_region]").val();
+			var disa = $("#formLaboral").find("select[name=codigo_disa]").val();
+			var red = $("#formLaboral").find("select[name=codigo_red]").val();
+				//if (id.length > 0 && anio) {
+					cargarIPRESS($("#formLaboral"), 1, 0, id,institucion,region,disa,red);
+					// filterAreaByYear("#formLaboral", id);
+				//}
+		  });
+
+		  function cargarIPRESS(form, select, codigo_renipress, codigo_micro_red,codigo_institucion,codigo_region,codigo_disa,codigo_red) {
+			var id_renipress = codigo_renipress;
+			$.ajax({
+				url: URI + 'contingencia/Main/cargarIPRESS',
+				method: 'post',
+				type: 'json',
+				data: { codigo_renipress: codigo_renipress, codigo_micro_red, codigo_institucion,codigo_region,codigo_disa,codigo_red },
+				error: function (xhr) { },
+				beforeSend: function () {
+					$(form).find("select[name=codigo_renipress]").html('<option value="">Cargando...</option>');
+				},
+				success: function (data) {
+					//console.log('here', data)
+					$(form).find("select[name=codigo_renipress]").html('<option value="0">-- Seleccione --</option>');
+					data = JSON.parse(data);
+					$.each(data, function (i, e) {
+						if (parseInt(codigo_renipress) > 0) { $(form).find("select[name=codigo_renipress]").append('<option value="' + e.codigo_renipress + '"' + (id_renipress == e.codigo_renipress ? 'selected' : "") + '>' + e.codigo_renipress + ' - ' + e.nombre + '</option>'); }
+						else { $(form).find("select[name=codigo_renipress]").append('<option value="' + e.codigo_renipress + '">' + e.codigo_renipress + ' - ' + e.nombre + '</option>'); }
+					});
+	
+				}
+			});
+	
+		}
+
+     </script>                                           
+
+    <script>
+    const idrenarhed = $('#id').val();
+    let onlyForm = true;//si esta variable esta en true permite cargar todas las tablas, solo la 1ra vez
+    //si esta false solo carga la tabala correspndiente
+
+         table = $('#tablaIdioma').DataTable({
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            dom: '<"html5buttons"B>lTfgitp',
+            columns: [
+               {
+               data: null,
+                  render: function (data, type, row) { 
+                     const btnDelete = `
+                     <button class="btn btn-primary btn-circle actionDeleteIdiomas" title="ELIMINAR" type="button">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                     </button>`;
+                     return `<div style="display: flex"> 
+                              ${canDelete ? btnDelete : ''}
+                              </div>`;
+                  }
+               },
+               {
+                  data: "idioma"// "ididioma"
+               },
+               {
+                  data: "nivel"
+               },
+               {
+                  data: "lectura",
+               },
+               {
+                  data: "escritura"
+               },         
+               {
+                  data: "Activo",
+                  render: function (data, type, row, meta) {
+                     return `<span class="badge ${data === 'Activo' ? 'badge-info' : 'badge-default'}">${data}</span>`
+                  }
+               },
+            ],
+            ajax : {
+               url : URI + "brigadistas/main/cargarListaIdiomasAjax"+"/"+idrenarhed,
+               type : "GET",
+              /*  data : function(d) {
+                     d.id = document.getElementById("id").value
+                     
+                  }  */
+               complete:function(){
+                  if(onlyForm)
+                  cargarTablaCarrera() ;
+               }
+            },
+            order: [],
+            columnDefs: [],
+            dom: 'Bfrtip',
+            select: true,
+            buttons: [
+               {
+                  extend: 'copy',
+                  title: 'Lista General de Idicomas',
+                  exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+               },
+               {
+                  extend: 'csv',
+                  title: 'Lista General de Idiomas',
+                  exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+               },
+               {
+                  extend: 'excel',
+                  title: 'Lista General de Idiomas',
+                  exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+               },
+               {
+                  extend: 'pdf',
+                  title: 'Lista General de Idiomas',
+                  orientation: 'landscape',
+                  exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+               },
+
+               {
+                  extend: 'print',
+                  title: 'Lista General de Idiomas',
+                  exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+                  customize: function (win) {
+                  $(win.document.body).addClass('white-bg');
+                  $(win.document.body).css('font-size', '10px');
+
+                  $(win.document.body).find('table')
+                     .addClass('compact')
+                     .css('font-size', 'inherit');
+
+                  var css = '@page { size: landscape; }',
+                     head = win.document.head || win.document.getElementsByTagName('head')[0],
+                     style = win.document.createElement('style');
+
+                  style.type = 'text/css';
+                  style.media = 'print';
+
+                  if (style.styleSheet) {
+                     style.styleSheet.cssText = css;
+                  }
+                  else {
+                     style.appendChild(win.document.createTextNode(css));
+                  }
+
+                  head.appendChild(style);
+                  }
+            }]
+         });
+function cargarTablaCarrera(){
+         tablaCarrera = $('#tablaCarrera').DataTable({
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            dom: '<"html5buttons"B>lTfgitp',
+            columns: [
+               {
+               data: null,
+                  render: function (data, type, row) { 
+                     const btnDelete = `
+                     <button class="btn btn-primary btn-circle actionDeleteCarreras" title="ELIMINAR" type="button">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                     </button>`;
+                     return `<div style="display: flex"> 
+                              ${canDelete ? btnDelete : ''}
+                              </div>`;
+                  }
+               },
+               {
+                  data: "idcarreras"
+               },
+               {
+                  data: "profesion" //idprofesion
+               },
+               {
+                  data: "especialidad"//idespecialidad
+               },
+               {
+                  data: "colegiatura"
+               }, 
+               {
+                  data: "rne"
+               },   
+               {
+                  data:null,
+                  render: function (data, type, row) {   
+                     let ruta = path_files + data.archivo_titulo;
+                     return (data.archivo_titulo!="")?`<a href="${ ruta}" target="_blank"><i class="fa fa-file" aria-hidden="true"></i></a> `: "-";
+                  }
+               },    
+               {
+                  data:null,
+                  render: function (data, type, row) {  
+                     let ruta = path_files + data.archivo_especialidad;
+                     return (data.archivo_especialidad!="")?`<a href="${ ruta}" target="_blank"><i class="fa fa-file" aria-hidden="true"></i></a> `: "-";
+                  }
+               },    
+               {
+                  data: "Activo",
+                  render: function (data, type, row, meta) {
+                     return `<span class="badge ${data === 'Activo' ? 'badge-info' : 'badge-default'}">${data}</span>`
+                  }
+               },
+            ],
+            ajax : {
+               url : URI + "brigadistas/main/cargarListaCarrerasAjax"+"/"+idrenarhed,
+               type : "GET",
+               /* data : function(d) {
+                     d.id = document.getElementById("id").value
+                     
+                  } */
+               complete:function(){
+                  if(onlyForm)
+                  cargarTablaCertificado() ;
+               }
+            },
+            
+
+            order: [],
+            columnDefs: [],
+            dom: 'Bfrtip',
+            select: true,
+            buttons: [{
+               extend: 'copy',
+               title: 'Lista General de Carrera',
+               exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+            },
+            {
+               extend: 'csv',
+               title: 'Lista General de Carrera',
+               exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+            },
+            {
+               extend: 'excel',
+               title: 'Lista General de Carrera',
+               exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+            },
+            {
+               extend: 'pdf',
+               title: 'Lista General de Carrera',
+               orientation: 'landscape',
+               exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+            },
+
+            {
+               extend: 'print',
+               title: 'Lista General de Carrera',
+               exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+               customize: function (win) {
+               $(win.document.body).addClass('white-bg');
+               $(win.document.body).css('font-size', '10px');
+
+               $(win.document.body).find('table')
+                  .addClass('compact')
+                  .css('font-size', 'inherit');
+
+               var css = '@page { size: landscape; }',
+                  head = win.document.head || win.document.getElementsByTagName('head')[0],
+                  style = win.document.createElement('style');
+
+               style.type = 'text/css';
+               style.media = 'print';
+
+               if (style.styleSheet) {
+                  style.styleSheet.cssText = css;
+               }
+               else {
+                  style.appendChild(win.document.createTextNode(css));
+               }
+
+               head.appendChild(style);
+               }
+            }]
+         });
+}    
+
+function cargarTablaCertificado(){
+         tablaCertificado = $('#tablaCertificado').DataTable({
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            dom: '<"html5buttons"B>lTfgitp',
+            columns: [
+               {
+               data: null,
+                  render: function (data, type, row) { 
+                     const btnDelete = `
+                     <button class="btn btn-primary btn-circle actionDeletetablaCertificados" title="ELIMINAR" type="button">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                     </button>`;
+                     return `<div style="display: flex"> 
+                              ${canDelete ? btnDelete : ''}
+                              </div>`;
+                  }
+               },
+               {
+                  data: "idcertificaciones"
+               },
+               {
+                  data: "nombre" //idinstitucion
+               },
+              
+               {
+                  data: "fecha_inicio"
+               }, 
+               {
+                  data: "fecha_vigencia"
+               },          
+               {
+                  data: "Activo",
+                  render: function (data, type, row, meta) {
+                     return `<span class="badge ${data === 'Activo' ? 'badge-info' : 'badge-default'}">${data}</span>`
+                  }
+               },
+               {
+                  data: "Activo"
+               }
+            ],
+            ajax : {
+               url : URI + "brigadistas/main/cargarListaCertificacionAjax"+"/"+idrenarhed,
+               type : "GET",
+              /*  data : function(d) {
+                     d.id = document.getElementById("id").value
+                     
+                  } */
+            },
+            order: [],
+            columnDefs: [],
+            dom: 'Bfrtip',
+            select: true,
+            buttons: [{
+               extend: 'copy',
+               title: 'Lista General de Certificados',
+               exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+            },
+            {
+               extend: 'csv',
+               title: 'Lista General de Certificados',
+               exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+            },
+            {
+               extend: 'excel',
+               title: 'Lista General de Certificados',
+               exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+            },
+            {
+               extend: 'pdf',
+               title: 'Lista General de Certificados',
+               orientation: 'landscape',
+               exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+            },
+
+            {
+               extend: 'print',
+               title: 'Lista General de Certificados',
+               exportOptions: { columns: [0, 1, 2, 3, 4, 5 ] },
+               customize: function (win) {
+               $(win.document.body).addClass('white-bg');
+               $(win.document.body).css('font-size', '10px');
+
+               $(win.document.body).find('table')
+                  .addClass('compact')
+                  .css('font-size', 'inherit');
+
+               var css = '@page { size: landscape; }',
+                  head = win.document.head || win.document.getElementsByTagName('head')[0],
+                  style = win.document.createElement('style');
+
+               style.type = 'text/css';
+               style.media = 'print';
+
+               if (style.styleSheet) {
+                  style.styleSheet.cssText = css;
+               }
+               else {
+                  style.appendChild(win.document.createTextNode(css));
+               }
+
+               head.appendChild(style);
+               }
+            }]
+         });
+}    
+       $(document).ready(function () {
+         
+
+          $('.tablaCarrera').on('click','tr .actionDeleteCarreras',function(){
+            
+            var tr =$(this).parents('tr');
+            var row=tablaCarrera.row(tr);
+
+            data=row.data();
+            var id=data.idcarreras;
+            var txt;
+            var r=confirm("¿Estás seguro que deseas realizar esta acción?");
+            if(r==true){
+               $.ajax({
+                  url:URI+ "brigadistas/main/eliminarCarreraPersonal",
+                  method:"post",
+                  type:"json",
+                  data:{
+                     id_carrera:id
+                  },
+                  error: function(xhr){},
+                  success:function(data){
+                     onlyForm = false;
+                     tablaCarrera.ajax.reload();
+                  }
+                });
+            } else {
+                    txt="You pressed Cancel";
+                    console.log(txt);
+                  }
+         });   
+         
+
+         $("select[name=idprofesion]").on("change",function(){
+		
+            var id = $(this).val();
+            
+            if(id > 0){
+
+               $.ajax({
+                  url:URI + "brigadistas/main/getEspecialidadesxProfesion",
+                  method:'post',
+                  type:'json',
+                  data:{
+                     id_profesion: id
+                  },
+                  error:function(xhr){},
+                  beforeSend:function(){
+                     $("select[name=idespecialidad]").html('<option value="">Cargando...</option>'); 
+                  },
+                  success:function(data){	
+                     data = JSON.parse(data);
+                     if (parseInt(data.length) > 0) {
+                        $htmlPOI = '<option value="">-- Seleccione especialidad --</option>';	
+                     } else {
+                        $htmlPOI = '<option value="">-- Sin Registros --</option>';
+                     }
+
+                     $.each(data, function(i, e){
+                        $htmlPOI += '<option value="' + e.id + '">'+e.especialidad +'</option>'				
+                     });
+                     $("select[name=idespecialidad]").html($htmlPOI);				
+                  }
+                     
+                  });
+               
+
+            }
+         });
+	 
+         
+
+
+         $('.tablaCertificado').on('click','tr .actionDeletetablaCertificados',function(){
+            
+            var tr =$(this).parents('tr');
+            var row=tablaCertificado.row(tr);
+
+            data=row.data();
+            var id=data.idcertificaciones;
+            var txt;
+            var r=confirm("¿Estás seguro que deseas realizar esta acción?");
+            if(r==true){
+               $.ajax({
+                  url:URI+ "brigadistas/main/eliminarCertificadoPersonal",
+                  method:"post",
+                  type:"json",
+                  data:{
+                     id_certificado:id
+                  },
+                  error: function(xhr){},
+                  success:function(data){
+                     onlyForm = false;
+                     tablaCertificado.ajax.reload();
+                  }
+                });
+            } else {
+                    txt="You pressed Cancel";
+                    console.log(txt);
+                  }
+         });   
+         
+       
+         
+
+         $('.tablaIdioma').on('click','tr .actionDeleteIdiomas',function(){
+            
+            var tr =$(this).parents('tr');
+            var row=table.row(tr);
+
+            data=row.data();
+            var id=data.ididiomas;
+            var txt;
+            var r=confirm("¿Estás seguro que deseas realizar esta acción?");
+            if(r==true){
+               $.ajax({
+                  url:URI+ "brigadistas/main/eliminarIdiomaPersonal",
+                  method:"post",
+                  type:"json",
+                  data:{
+                     id_idioma:id
+                  },
+                  error: function(xhr){},
+                  success:function(data){
+                     onlyForm = false;
+                     table.ajax.reload();
+                  }
+                });
+            } else {
+                    txt="You pressed Cancel";
+                    console.log(txt);
+                  }
+         });
+
+      });
+
+
+   $("#formIdioma").validate({
+		rules:{
+         ididioma:{required:function(){if($("#ididioma").css("display")!="none") return true; else return false;}}, 
+         nivel:{required:function(){if($("#nivel").css("display")!="none") return true; else return false;}}, 
+
+		},
+		messages:{
+			ididioma:{required:"Campo requerido"}, 
+			nivel:{required:"Campo requerido"}, 
+		},
+		errorPlacement: function(error, element) {
+			 
+		},
+		submitHandler:function(form,event){
+
+			event.preventDefault(); 
+			
+			var formData = new FormData(document.getElementById("formIdioma"));
+         formData.append("id", $("#id").val());
+			 
+			$.ajax({
+				data: formData,
+				url:URI+"brigadistas/registrarIdioma",
+				method:"POST",
+				dataType:"json",
+				cache: false,
+			   contentType: false,
+			   processData: false,
+				beforeSend: function(){
+               $("#cargando").html("<i class='fa fa-refresh fa-spin fa-3x fa-fw'></i>");
+               $(".btn-block").addClass("disabled");
+               $("#message").html("");
+
+            },
+            success: function(data){
+               $("#cargando").html("<i></i>");
+               $('html, body').animate({ scrollTop: 0 }, 'fast');
+					
+					var $message = "";
+					
+					if(parseInt(data.status)==200){ $(".btn-block").removeClass("disabled");  $message = '<div class="alert alert-success"><h4 style="margin:0">Idioma registrado exitosamente</h4></div>'; }
+					else {
+						$message = '<div class="alert alert-error"><h4 style="margin:0">No se pudo registrar el idioma</h4></div>';
+						$(".btn-block").removeClass("disabled");
+					}
+
+               $("#message").html($message);
+               $('#formIdioma')[0].reset();//reseteas el form
+               setTimeout(function(){
+                  $("#message").slideUp();
+                  onlyForm = false;
+                  table.ajax.reload();
+                  $('html, body').animate({ scrollTop: $('body').height() }, 'fast');
+               },3500);  
+					//restaura los compos
+               //if(parseInt(data.status)==200) setTimeout(function(){$("#message").slideUp();location.href=URI+"brigadistas";},3500);  
+               
+            }
+			});
+
+		}
+	});
+
+
+   //creando el js para carrera
+   $("#formCarrera").validate({
+		rules:{
+
+		},
+		messages:{
+		},
+		errorPlacement: function(error, element) {
+			 
+		},
+		submitHandler:function(form,event){
+
+			event.preventDefault(); 
+			
+         var formData = new FormData(document.getElementById("formCarrera"));
+         formData.append("file", document.getElementById("file_titulo"));
+         formData.append("file", document.getElementById("file_especialidad")); 	
+         formData.append("id", $("#id").val());	
+			 
+			$.ajax({
+				data: formData,
+				url:URI+"brigadistas/registrarCarrera",
+				method:"POST",
+				dataType:"json",
+				cache: false,
+			   contentType: false,
+			   processData: false,
+				beforeSend: function(){
+               $("#cargando").html("<i class='fa fa-refresh fa-spin fa-3x fa-fw'></i>");
+               $(".btn-block").addClass("disabled");
+               $("#message").html("");
+
+            },
+            success: function(data){
+               $("#cargando").html("<i></i>");
+               $('html, body').animate({ scrollTop: 0 }, 'fast');
+					
+					var $message = "";
+					
+					if(parseInt(data.status)==200){ $(".btn-block").removeClass("disabled");  $message = '<div class="alert alert-success"><h4 style="margin:0">Carrera registrada exitosamente</h4></div>'; }
+					else {
+						$message = '<div class="alert alert-error"><h4 style="margin:0">No se pudo registrar la carrera</h4></div>';
+						$(".btn-block").removeClass("disabled");
+					}
+
+               $("#message").html($message);
+               $('#formCarrera')[0].reset();//reseteas el form
+               setTimeout(function(){
+                  $("#message").slideUp();
+                  onlyForm = false;
+                  tablaCarrera.ajax.reload();//recargar la tabla
+               },3500);  
+					//restaura los compos
+               //if(parseInt(data.status)==200) setTimeout(function(){$("#message").slideUp();location.href=URI+"brigadistas";},3500);  
+               
+            }
+			});
+
+		}
+	});
+
+
+   $("#formCertificado").validate({
+		rules:{
+
+		},
+		messages:{
+		},
+		errorPlacement: function(error, element) {
+			 
+		},
+		submitHandler:function(form,event){
+
+			event.preventDefault(); 
+			
+			var formData = new FormData(document.getElementById("formCertificado"));
+         formData.append("id", $("#id").val());
+			 
+			$.ajax({
+				data: formData,
+				url:URI+"brigadistas/registrarCertificado",
+				method:"POST",
+				dataType:"json",
+				cache: false,
+			   contentType: false,
+			   processData: false,
+				beforeSend: function(){
+               $("#cargando").html("<i class='fa fa-refresh fa-spin fa-3x fa-fw'></i>");
+               $(".btn-block").addClass("disabled");
+               $("#message").html("");
+
+            },
+            success: function(data){
+               $("#cargando").html("<i></i>");
+               $('html, body').animate({ scrollTop: 0 }, 'fast');
+					
+					var $message = "";
+					
+					if(parseInt(data.status)==200){ $(".btn-block").removeClass("disabled");  $message = '<div class="alert alert-success"><h4 style="margin:0">Idioma registrado exitosamente</h4></div>'; }
+					else {
+						$message = '<div class="alert alert-error"><h4 style="margin:0">No se pudo registrar el idioma</h4></div>';
+						$(".btn-block").removeClass("disabled");
+					}
+
+               $("#message").html($message);
+               $('#formCertificado')[0].reset();//reseteas el form
+               setTimeout(function(){
+                  $("#message").slideUp();
+                  onlyForm = false;
+                  tablaCertificado.ajax.reload();//recargar la tabla
+               },3500);  
+					//restaura los compos
+               //if(parseInt(data.status)==200) setTimeout(function(){$("#message").slideUp();location.href=URI+"brigadistas";},3500);  
+               
+            }
+			});
+
+		}
+	});
+
+   //creando para tabla Laboral
+   $("#formLaboral").validate({
+		rules:{
+
+		},
+		messages:{
+		},
+		errorPlacement: function(error, element) {
+			 
+		},
+		submitHandler:function(form,event){
+
+			event.preventDefault(); 
+			
+			var formData = new FormData(document.getElementById("formLaboral"));
+         formData.append("id", $("#id").val());
+			 
+			$.ajax({
+				data: formData,
+				url:URI+"brigadistas/registrarLaboral",
+				method:"POST",
+				dataType:"json",
+				cache: false,
+			   contentType: false,
+			   processData: false,
+				beforeSend: function(){
+               $("#cargando").html("<i class='fa fa-refresh fa-spin fa-3x fa-fw'></i>");
+               $(".btn-block").addClass("disabled");
+               $("#message").html("");
+
+            },
+            success: function(data){
+               $("#cargando").html("<i></i>");
+               $('html, body').animate({ scrollTop: 0 }, 'fast');
+					
+					var $message = "";
+					
+					if(parseInt(data.status)==200){ $(".btn-block").removeClass("disabled");  $message = '<div class="alert alert-success"><h4 style="margin:0">Condición Laboral registrado exitosamente</h4></div>'; }
+					else {
+						$message = '<div class="alert alert-error"><h4 style="margin:0">No se pudo registrar el idioma</h4></div>';
+						$(".btn-block").removeClass("disabled");
+					}
+
+               $("#message").html($message);
+               $('#formCertificado')[0].reset();//reseteas el form
+               setTimeout(function(){
+                  $("#message").slideUp();
+                  onlyForm = false;
+                  tablaCertificado.ajax.reload();//recargar la tabla
+               },3500);  
+					//restaura los compos
+               //if(parseInt(data.status)==200) setTimeout(function(){$("#message").slideUp();location.href=URI+"brigadistas";},3500);  
+               
+            }
+			});
+
+		}
+	});
+
+
+  </script> 
+ 
+   </body>
+</html>

@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title><?=TITULO_PRINCIPAL?></title>
+      <meta name="author" content="<?=AUTOR?>">
+     
+      <!-- Favicon -->
+      <link rel="shortcut icon" href="<?=base_url()?>public/images/favicon.jpg">
+      <link rel="icon" href="<?=base_url()?>public/images/favicon.jpg" type="image/x-icon">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="<?=base_url()?>public/template/css/bootstrap.min.css">
+      <!-- Typography CSS -->
+      <link rel="stylesheet" href="<?=base_url()?>public/template/css/typography.css">
+      <!-- Style CSS -->
+      <link rel="stylesheet" href="<?=base_url()?>public/template/css/style.css">
+      <!-- Responsive CSS -->
+      <link rel="stylesheet" href="<?=base_url()?>public/template/css/responsive.css">
+
+
+      
+<!-- Data table CSS -->
+<link href="<?=base_url()?>public/css/datatables.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="<?=base_url()?>public/css/tablero/gestionarTablero.css?v=<?=date("s")?>"/>
+
+<style>
+		#canvas .circle {
+			display: inline-block;
+			margin: 1em;
+		}
+
+		.circles-decimals {
+			font-size: .4em;
+		}
+</style>
+   
+
+
+   </head>
+   <body>
+      <!-- loader Start -->
+      <div id="loading">
+         <div id="loading-center">
+         </div>
+      </div>
+      <!-- loader END -->
+      <!-- Wrapper Start -->
+      <div class="wrapper">
+      <!-- Sidebar  -->
+      <?php $this->load->view("inc/nav-template"); ?>
+         <!-- Page Content  -->
+         <div id="content-page" class="content-page">
+            <!-- TOP Nav Bar -->
+            <?php $this->load->view("inc/nav-top-template"); ?>
+            <!-- TOP Nav Bar END -->
+         <div class="container-fluid">
+               <div class="row">
+                  <div class="col-lg-12">
+                    <?php //echo "<pre>"; echo $lista; echo '<br>'.$pacientes;//echo "<pre>"; echo var_dump($lista); ?>
+                  </div>
+               </div>
+
+                      <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                              <div class="iq-card-body iq-bg-primary rounded">
+                                 <div class="d-flex align-items-center justify-content-between">
+                                    <div class="rounded-circle iq-card-icon bg-primary"><i class="ri-user-fill"></i></div>
+                                    <div class="text-right">                                 
+                                       <h2 class="mb-0"><span class="counter">57</span></h2>
+                                       <h5 class="">Acc. Operativas</h5>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                              <div class="iq-card-body iq-bg-warning rounded">
+                                 <div class="d-flex align-items-center justify-content-between">
+                                    <div class="rounded-circle iq-card-icon bg-warning"><i class="ri-women-fill"></i></div>
+                                    <div class="text-right">                                 
+                                       <h2 class="mb-0"><span class="counter">5</span></h2>
+                                       <h5 class="">Áreas/Unidades</h5>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                              <div class="iq-card-body iq-bg-danger rounded">
+                                 <div class="d-flex align-items-center justify-content-between">
+                                    <div class="rounded-circle iq-card-icon bg-danger"><i class="ri-group-fill"></i></div>
+                                    <div class="text-right">                                 
+                                       <h2 class="mb-0"><span class="counter">10</span></h2>
+                                       <h5 class="">Act.Presupuestal</h5>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                              <div class="iq-card-body iq-bg-info rounded">
+                                 <div class="d-flex align-items-center justify-content-between">
+                                    <div class="rounded-circle iq-card-icon bg-info"><i class="ri-hospital-line"></i></div>
+                                    <div class="text-right">                                 
+                                       <h2 class="mb-0"><span class="counter">35</span></h2>
+                                       <h5 class="">Pro.Presupuestal</h5>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     <center>
+                     <div id="canvas">
+                        <div class="circle" id="circles-1"></div>
+                        <div class="circle" id="circles-2"></div>
+                        <div class="circle" id="circles-3"></div>
+                        <div class="circle" id="circles-4"></div>
+                        <div class="circle" id="circles-5"></div>
+                        <div class="circle" id="circles-6"></div>
+                        <div class="circle" id="circles-7"></div>
+                     </div>
+                      </center>
+
+                      <center>
+                     <div>
+                        <label style="width:13%" for="ggg">COE SALUD</label>
+                        <label style="width:13%" for="ggg">UDLDN</label>
+                        <label style="width:13%" for="ggg">UGOED</label>
+                        <label style="width:13%" for="ggg">UGRD-HS</label>
+                        <label style="width:13%">UPPDN</label>
+                        <label style="width:13%">CICOM-EMT</label>
+                        <label style="width:13%">UFI</label>
+                     </div>
+                      </center>
+
+
+
+
+
+               <div class="row">
+                   <div class="col-6">
+                     <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 class="card-title">Ejecución de Metas Financieras Porcentuales</h4>
+                           </div>
+                        </div>
+                        <div class="iq-card-body" style="position: relative;height: 400px;">
+                           <div id="apex-pie-chart"></div>
+                        </div>
+                     </div>
+                     </div>
+
+
+                     <div class="col-6">
+                     <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 class="card-title">Ejecución de Montos Ejecutados por Área</h4>
+                           </div>
+                        </div>
+                        <div class="iq-card-body">
+                           <div id="apex-bar"></div>
+                        </div>
+                     </div>
+                     </div>
+                  <br>
+               </div>
+
+                      
+
+                 <div class="iq-card">
+                        
+                        <div class="iq-card-body">
+                           <form id="formRegistrarEnlace" action="" method="POST">
+                                 <div class="form-group row">
+                                    <label class="control-label col-sm-5 align-self-center mb-0" for="email">Seleccione el año de Ejecucion:</label>
+                                    <div class="col-sm-7">
+                                    <select class="form-control" id="Anio" name="Anio">
+                                       <option value="">[Seleccione]</option>
+                                       <?php foreach($listaAnioEjecucion->result() as $row): ?>
+                                       <?php if($row->Anio_Ejecucion==$anio){ ?>
+                                       <option value="<?=$row->Anio_Ejecucion?>" selected>
+                                          <?=$row->Anio_Ejecucion?>
+                                       </option>
+                                       <?php
+                                                         }else{ ?>
+                                       <option value="<?=$row->Anio_Ejecucion?>">
+                                          <?=$row->Anio_Ejecucion?>
+                                       </option>
+                                       <?php } ?>
+                                       <?php endforeach; ?>
+                                       </select>
+                                    
+                                    </div>
+                                 </div>
+                                 <div class="form-group row">
+                                    <label class="control-label col-sm-5 align-self-center mb-0" for="pwd1">Seleccione la unidad operativa y/o area:</label>
+                                    <div class="col-sm-7">
+                                    <select class="form-control" id="Codigo_Area" name="Codigo_Area" style="font-size: 12px;"
+                                          required>
+                                          <option value="">[ -- Seleccione -- ]</option>
+                                          <?php foreach($listaAreasByUser->result() as $row): ?>
+                                          <option value="<?=$row->Codigo_Area?>">
+                                             <?=$row->Nombre_Area?>
+                                          </option>
+                                          <?php endforeach; ?>
+                                       </select>
+                                    </div>
+                                 </div>
+
+
+                                 <div class="form-group row">
+                                    <label class="control-label col-sm-5 align-self-center mb-0" for="pwd1">Seleccione un mes:</label>
+                                    <div class="col-sm-7">
+                                       <select class="form-control" id="mes" name="mes" style="font-size:12px;">
+                                          <option value="">[ -- Seleccione -- ]</option>
+                                          <option value="1">Enero</option>
+                                          <option value="2">Febrero</option>
+                                          <option value="3">Marzo</option>
+                                          <option value="4">Abril</option>
+                                          <option value="5">Mayo</option>
+                                          <option value="6">Junio</option>
+                                          <option value="7">Julio</option>
+                                          <option value="8">Agosto</option>
+                                          <option value="9">Septiembre</option>
+                                          <option value="10">Octubre</option>
+                                          <option value="11">Noviembre</option>
+                                          <option value="12">Diciembre</option>
+                                       </select>
+                                    </div>
+                                 </div> 
+
+                           </form> 
+                           <div class="row">
+
+                           <!-- <div id="div-canvas-left" class="col-sm-6"></div>
+                           <div id="div-canvas-right" class="col-sm-6"></div> -->
+                           </div>
+                           
+                        <br />
+                        <div class="clearfix"></div>
+                         
+                         
+                          <!-- -->
+                        <div class="table-responsive">
+                        <table id="tbListar" class="table table-bordered table-sm" style="width: 100%;">
+                           <thead>
+                              <tr>
+                              <th>A&ntilde;o</th>
+                              <th>Tarea</th>
+                              <th>N&deg; Documento</th>
+                              <th>Observaciones</th>
+                              <th>Actividad</th>
+                              <th>&Aacute;rea</th>
+                              <th>Unidad Medida</th>
+                              <th>Cant.</th>
+                              <th>Mes</th>
+                              <th>C. Act. Proyecto</th>
+                              <th>C. Actividad</th>
+                              <th>C. Prog. Presupuestal</th>
+                              <th>C. Finalidad</th>
+                              <th>Archivo</th>
+                              <th>Nombre Documento</th>
+                              <th>Estado</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                           </tbody>
+                        </table>
+                        </div> 
+                           <!-- -->
+
+                        </div>
+
+
+                        <div class="clearfix"></div>
+  
+                                                   
+                                                               
+
+
+
+                            </div>
+
+
+                              <!-- Footer -->
+                              <?php $this->load->view("inc/footer-template"); ?>
+                              <!-- Footer END -->
+                           </div>
+                       </div> <!-- iq-card -->
+
+                        </div> <!-- container-fluid -->
+                        </div> <!-- Page Conten -->
+                        </div> <!-- wrapper -->
+                                   
+
+      <!-- Wrapper END -->
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="<?=base_url()?>public/template/js/jquery.min.js"></script>
+      <script src="<?=base_url()?>public/template/js/popper.min.js"></script>
+      <script src="<?=base_url()?>public/template/js/bootstrap.min.js"></script>
+      <!-- Appear JavaScript -->
+      <script src="<?=base_url()?>public/template/js/jquery.appear.js"></script>
+      <!-- Countdown JavaScript -->
+      <script src="<?=base_url()?>public/template/js/countdown.min.js"></script>
+      <!-- Counterup JavaScript -->
+      <script src="<?=base_url()?>public/template/js/waypoints.min.js"></script>
+      <script src="<?=base_url()?>public/template/js/jquery.counterup.min.js"></script>
+      <!-- Wow JavaScript -->
+      <script src="<?=base_url()?>public/template/js/wow.min.js"></script>
+      <!-- Apexcharts JavaScript -->
+      <script src="<?=base_url()?>public/template/js/apexcharts.js"></script>
+      <!-- Slick JavaScript -->
+      <script src="<?=base_url()?>public/template/js/slick.min.js"></script>
+      <!-- Select2 JavaScript -->
+      <script src="<?=base_url()?>public/template/js/select2.min.js"></script>
+      <!-- Owl Carousel JavaScript -->
+      <script src="<?=base_url()?>public/template/js/owl.carousel.min.js"></script>
+      <!-- Magnific Popup JavaScript -->
+      <script src="<?=base_url()?>public/template/js/jquery.magnific-popup.min.js"></script>
+      <!-- Smooth Scrollbar JavaScript -->
+      <script src="<?=base_url()?>public/template/js/smooth-scrollbar.js"></script>
+      <!-- lottie JavaScript -->
+      <script src="<?=base_url()?>public/template/js/lottie.js"></script>
+      <!-- Chart Custom JavaScript -->
+      <script src="<?=base_url()?>public/template/js/chart-custom.js"></script>
+      <!-- Custom JavaScript -->
+      <script src="<?=base_url()?>public/template/js/custom.js"></script>
+      <script src="<?=base_url()?>public/js/Chart.min.js"></script>
+
+
+      <!--inicio del script original-->
+      <script src="<?=base_url()?>public/js/tablero/enlaceReporteNuevo.js?v=<?=date(" s")?>"></script>
+  <script>
+    enlazar("<?=base_url()?>");    
+  </script>
+      <!-- fin de script orifinal-->
+
+
+
+<!-- Data table JavaScript -->
+   <script src="<?=base_url()?>public/js/datatables.min.js"></script>
+
+   <script src="<?=base_url()?>public/js/circles.js"></script>
+   <script>
+
+
+   // const URI_MAP = "<?=base_url()?>";
+    const canDelete = "1";
+    const canEdit = "1";
+    const canTracking = "1";
+    const canHistory = "1"; 
+    
+    const lista = ""; 
+    
+  </script>
+  
+  <script> 
+  $(document).ready(function () {
+    // console.log(lista);
+      let table = $('.tablaPaciente').DataTable({
+         pageLength: 5,
+         lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+         data: lista,
+         dom: '<"html5buttons"B>lTfgitp',
+         columns: [
+            {
+            data: null,
+               render: function (data, type, row) {
+                  const btnEdit = `
+                  <button class="btn btn-warning btn-circle actionEdit" title="EDITAR" type="button" style="margin-right: 5px;">
+                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </button>`;
+                  const btnDelete = `
+                  <button class="btn btn-primary btn-circle actionDelete" title="ELIMINAR" type="button">
+                     <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>`;
+                  return `<div style="display: flex">
+                           ${canEdit ? btnEdit : ''} 
+                           ${canDelete ? btnDelete : ''}
+                           </div>`;
+               }
+            },
+            {
+               data: "hospital_nombre"
+            },
+            {
+               data: "Region"
+            },
+            {
+               data: "hospital_id",
+            },
+            {
+               data: "hospital_id"
+            },
+            {
+               data: "hospital_id"
+            }, 
+            {
+               data: "hospital_id"
+            },
+            {
+               data: "fecha"
+            },
+           /*{
+            data: "S"
+            },
+            {
+            data: "N"
+            },
+            {
+            data: null,
+            render: function (data, type, row) {
+               return canTracking ? `<button class="btn btn-success btn-circle actionActualizar" title="SEGUIMIENTO" type="button">
+               <i class="fa fa-lock" aria-hidden="true"></i>
+            </button>` : `-`;
+            }
+            },
+            {
+            data: null,
+            render: function (data, type, row) {
+               return canHistory ? `<button class="btn btn-info btn-circle actionHistorial" title="HISTORIAL" type="button">
+               <i class="fa fa-list-ul" aria-hidden="true"></i>
+            </button>` : `-`;
+            }
+            },*/
+            {
+               data: "Activo",
+               render: function (data, type, row, meta) {
+                  return `<span class="badge ${data === 'Activo' ? 'badge-info' : 'badge-default'}">${data}</span>`
+               }
+            },
+         ],
+         order: [],
+         columnDefs: [],
+         dom: 'Bfrtip',
+         select: true,
+         buttons: [{
+            extend: 'copy',
+            title: 'Lista General de Pacientes',
+            exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6,7,8] },
+         },
+         {
+            extend: 'csv',
+            title: 'Lista General de Pacientes',
+            exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6,7,8] },
+         },
+         {
+            extend: 'excel',
+            title: 'Lista General de Pacientes',
+            exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6,7,8] },
+         },
+         {
+            extend: 'pdf',
+            title: 'Lista General de Pacientes',
+            orientation: 'landscape',
+            exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6,7,8] },
+         },
+
+         {
+            extend: 'print',
+            title: 'Lista General de Pacientes',
+            exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6,7,8] },
+            customize: function (win) {
+            $(win.document.body).addClass('white-bg');
+            $(win.document.body).css('font-size', '10px');
+
+            $(win.document.body).find('table')
+               .addClass('compact')
+               .css('font-size', 'inherit');
+
+            var css = '@page { size: landscape; }',
+               head = win.document.head || win.document.getElementsByTagName('head')[0],
+               style = win.document.createElement('style');
+
+            style.type = 'text/css';
+            style.media = 'print';
+
+            if (style.styleSheet) {
+               style.styleSheet.cssText = css;
+            }
+            else {
+               style.appendChild(win.document.createTextNode(css));
+            }
+
+            head.appendChild(style);
+            }
+         }]
+      });
+
+   });
+  </script> 
+
+<script>
+		var colors = [
+				['#D3B6C6', '#4B253A'], ['#FCE6A4', '#EFB917'], ['#BEE3F7', '#45AEEA'], ['#F8F9B6', '#D2D558'], ['#F4BCBF', '#D43A43']
+			],
+			circles = [];
+
+		for (var i = 1; i <= 7; i++) {
+			var child = document.getElementById('circles-' + i),
+				percentage = 31.42 + (i * 9.84),
+				
+				circle = Circles.create({
+					id:         child.id,
+					value:      percentage,
+					radius:     getWidth(),
+					width:      13,
+					colors:     colors[i - 1]
+				});
+
+			circles.push(circle);
+		}
+
+		window.onresize = function(e) {
+			for (var i = 0; i < circles.length; i++) {
+				circles[i].updateRadius(getWidth());
+			}
+		};
+
+		function getWidth() {
+			return window.innerWidth / 26;
+		}
+
+	</script>
+ 
+   </body>
+</html>
