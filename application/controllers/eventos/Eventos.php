@@ -797,6 +797,63 @@ class Eventos extends CI_Controller
         echo json_encode($datos);
     }
 
+    public function entidadesSaludAPI()
+    {
+        
+        $departamento = $this->input->post("departamento");
+        $provincia = $this->input->post("provincia");
+        $distrito = $this->input->post("distrito");
+
+        $handler = curl_init();
+        curl_setopt($handler, CURLOPT_URL, getenv("API_RENIPRESS_URL") . $tipo_documento . "/" . $documento . "/");
+        curl_setopt($handler, CURLOPT_HEADER, FALSE);
+        curl_setopt($handler, CURLOPT_HTTPHEADER, array(
+            "Authorization: " . getenv("API_RENIEC_TOKEN"),
+            "Content-Type: application/json"
+        ));
+        curl_setopt($handler, CURLOPT_RETURNTRANSFER, TRUE);
+        $data = curl_exec($handler);
+        $code = curl_getinfo($handler, CURLINFO_HTTP_CODE);
+        
+        curl_close($handler);
+        
+        echo $data;
+        
+        /*
+        $this->load->model("EntidadSalud_model");
+        
+        $departamento = $this->input->post("departamento");
+        $provincia = $this->input->post("provincia");
+        $distrito = $this->input->post("distrito");
+        
+        $ubigeo = $departamento . $provincia . $distrito;
+        
+        $data = array();
+        
+        if (strlen($ubigeo) > 5) {
+            
+            $this->EntidadSalud_model->setCodigo_Ubigeo($ubigeo);
+            
+            $lista = $this->EntidadSalud_model->lista();
+            
+            if ($lista->num_rows() > 0) {
+                foreach ($lista->result() as $row) :
+                    $data[] = array(
+                        "CodEESS" => $row->CodEESS,
+                        "Nombre" => $row->Nombre,
+                        "Clasificacion" => $row->Clasificacion
+                    );
+                endforeach
+                ;
+            }
+        }
+        
+        $datos = Array(
+            "data" => $data
+        );
+        echo json_encode($datos);*/
+    }
+
     public function agregarLesionadosHistorial()
     {
         $this->load->model("EventoRegistrarDaniosLesionados_model");

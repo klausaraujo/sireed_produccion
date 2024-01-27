@@ -47,7 +47,7 @@ class Main extends CI_Controller
         $listaralerta = $this->AlertaPronostico_model->listaralerta();
         $data = array("listaralerta" => $listaralerta);
 
-        $this->load->view("tablas/Main", $data);
+        $this->load->view("tablas/main", $data);
     }
     
     public function evento() {
@@ -60,7 +60,7 @@ class Main extends CI_Controller
         $listaralerta = $this->AlertaPronostico_model->listaralerta();
 
         $data = array("listaTipoEventos" => $listaTipoEventos, "lista" => $lista, "listaralerta" => $listaralerta);
-        $this->load->view("tablas/Eventos", $data);
+        $this->load->view("tablas/main", $data);
     }
     
     public function eventoGestionar() {
@@ -453,6 +453,163 @@ class Main extends CI_Controller
         }
 
         redirect("tablas/main/tipoAccionEntidad");
+        
+    }
+
+    public function perfiles() {
+        $this->load->model("Perfiles_model");
+        $lista = $this->Perfiles_model->lista();
+        
+        $data = array( "lista" => $lista);
+        $this->load->view("tablas/perfiles", $data);
+    }
+    
+    public function perfilesGestionar() {
+        $this->load->model("Perfiles_model");
+        
+        $Codigo_Perfil = $this->input->post("Codigo_Perfil");
+        $Descripcion_Perfil = $this->input->post("Descripcion_Perfil");
+        
+        $isUpdate = true;
+        if (strlen($Codigo_Perfil) == 0) {
+            $isUpdate = false;
+        }
+        
+        $this->Perfiles_model->setDescripcion_Perfil(strtoupper($Descripcion_Perfil));
+        
+        if ($isUpdate) {
+            $this->Perfiles_model->setCodigo_Perfil($Codigo_Perfil);
+            if($this->Perfiles_model->editar() > 0) {
+                $this->session->set_flashdata('mensajeSuccess', 'El perfil fue editado');
+            } else {
+                $this->session->set_flashdata('mensajeError', 'No se pudo editar el perfil');
+            }
+        } else {
+            $Codigo_Perfil = $this->Perfiles_model->obtenerCodigoMayor() + 1;
+            $Codigo_Perfil = addCero($Codigo_Perfil);
+            $this->Perfiles_model->setCodigo_Perfil($Codigo_Perfil);
+            if($this->Perfiles_model->crear() > 0) {
+                $this->session->set_flashdata('mensajeSuccess', 'Se creo el perfil');
+            } else {
+                $this->session->set_flashdata('mensajeError', 'No se pudo crear el perfil');
+            }
+        }
+        redirect("tablas/main/perfiles");
+    }
+
+    public function perfilesEliminar() {
+        $this->load->model("Perfiles_model");
+        //$this->load->model("Perfiles_model");
+
+        $Codigo_Perfil = $this->input->post("Codigo_Perfil");
+
+        $this->Perfiles_model->setCodigo_Perfil($Codigo_Perfil);
+        $rsExisteEntidades = $this->Perfiles_model->moduloPorPerfil();
+
+        $existeEntidades = false;
+        $row = $rsExisteEntidades->row();
+        if ( $row->total > 0 ) {
+            $existeEntidades = true;
+        }
+
+        if ($existeEntidades) {
+            $this->session->set_flashdata('mensajeError', 'No se pudo eliminar, tiene registro(s) de tipo Módulo por Perfil');
+        } else {
+            $this->Perfiles_model->setCodigo_Perfil($Codigo_Perfil);
+
+            if($this->Perfiles_model->eliminar() > 0) {
+                $this->session->set_flashdata('mensajeSuccess', 'El perfil fue eliminado');
+            } else {
+                $this->session->set_flashdata('mensajeError', 'No se pudo eliminar el perfil');
+            }
+        }
+
+        redirect("tablas/main/perfiles");
+
+    }
+
+    public function perfilModulos() {
+        $this->load->model("PerfilModulo_model");
+        $this->load->model("Perfiles_model");
+        $lista = $this->PerfilModulo_model->lista();
+        $listarperfiles = $this->Perfiles_model->listar();
+        $listarmodulos = $this->Perfiles_model->listarmodulos();
+        
+        $data = array( "lista" => $lista, "listarperfiles" => $listarperfiles, "listarmodulos" => $listarmodulos);
+        $this->load->view("tablas/perfilModulos", $data);
+    }
+    
+    public function perfilModulosGestionar() {
+        $this->load->model("PerfilModulo_model");
+        
+        $idmodulo = $this->input->post("idmodulo");
+        $Codigo_Perfil = $this->input->post("Codigo_Perfil");
+        $idmodulorol = $this->input->post("idmodulorol");
+        
+        $isUpdate = true;
+        if (strlen($idmodulorol) == 0) {
+            $isUpdate = false;
+        }
+        
+        $this->PerfilModulo_model->setIdmodulo($idmodulo);
+        $this->PerfilModulo_model->setCodigo_Perfil(strtoupper($Codigo_Perfil));
+
+        if ($isUpdate) {
+            $this->PerfilModulo_model->setIdmodulorol($idmodulorol);
+            if($this->PerfilModulo_model->editar() > 0) {
+                $this->session->set_flashdata('mensajeSuccess', 'La relación Perfil / Módulo fue editado');
+            } else {
+                $this->session->set_flashdata('mensajeError', 'No se pudo editar la relación Perfil / Módulo');
+            }
+        } else {
+            //$Tipo_Accion_Entidad_Codigo = $this->PerfilModulo_model->obtenerCodigoMayor() + 1;
+            //$Tipo_Accion_Entidad_Codigo = addCero($Tipo_Accion_Entidad_Codigo);
+            $this->PerfilModulo_model->setIdmodulo($idmodulo);
+            $this->PerfilModulo_model->setCodigo_Perfil($Codigo_Perfil);
+            if($this->PerfilModulo_model->crear() > 0) {
+                $this->session->set_flashdata('mensajeSuccess', 'Se creo la relación Perfil / Módulo');
+            } else {
+                $this->session->set_flashdata('mensajeError', 'No se pudo crear la relación Perfil / Módulo');
+            }
+        }
+        redirect("tablas/main/perfilModulos");
+    }
+    
+    public function perfilModulosEliminar() {
+        $this->load->model("PerfilModulo_model");
+        $this->load->model("EventoAcciones_model");
+        
+        $idmodulo = $this->input->post("idmodulo");
+        $Codigo_Perfil = $this->input->post("Codigo_Perfil");
+        $idmodulorol = $this->input->post("idmodulorol");
+        
+        $this->PerfilModulo_model->setIdmodulorol($idmodulorol);
+        $this->PerfilModulo_model->setCodigo_Perfil($Codigo_Perfil);
+        
+        /*
+        $rsExisteEventosAccion = $this->EventoAcciones_model->accionesPorTipoAccionEntidad();
+        
+        $existeEventosAccion = false;
+        $row = $rsExisteEventosAccion->row();
+        if ( $row->total > 0 ) {
+            $existeEventosAccion = true;
+        }
+        
+
+        if ($existeEventosAccion) {
+            $this->session->set_flashdata('mensajeError', 'No se pudo eliminar, tiene registro(s) de acciones');
+        } else { 
+            $this->TipoAccionEntidad_model->setTipo_Accion_Codigo($Tipo_Accion_Codigo);
+            $this->TipoAccionEntidad_model->setTipo_Accion_Entidad_Codigo($Tipo_Accion_Entidad_Codigo);
+            */
+            if($this->PerfilModulo_model->eliminar() > 0) {
+                $this->session->set_flashdata('mensajeSuccess', 'La relación Módulo / Perfil fue eliminada');
+            } else {
+                $this->session->set_flashdata('mensajeError', 'No se pudo eliminar la relación Módulo / Perfil');
+            }
+        //}
+
+        redirect("tablas/main/perfilModulos");
         
     }
 

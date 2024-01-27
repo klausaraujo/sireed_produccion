@@ -9,10 +9,9 @@
 <meta name="keywords" content="">
 <meta name="author" content="<?=AUTOR?>">
   <?php
-
 $this->load->view("inc/resources");
-$titulo = "Gesti&oacute;n Brigadista Especialidad";
-$botonCrear = "Registrar Especialidad";
+$titulo = "Gesti&oacute;n de Eventos";
+$botonCrear = "Registrar Evento";
 ?>
 </head>
 <body>
@@ -28,7 +27,7 @@ $botonCrear = "Registrar Especialidad";
             <ol class="breadcrumb">
               <li><a href="<?=base_url()?>">Inicio</a></li>
               <li><a href="<?=base_url()?>tablas/main"><span>Tablas Padre</span></a></li>
-              <li class="active"><span>Brigadista Especialidad</span></li>
+              <li class="active"><span>Eventos</span></li>
             </ol>
           </div>
         </div>
@@ -41,7 +40,9 @@ $botonCrear = "Registrar Especialidad";
                     <div class="panel-body pa-0">
                       <div class="sm-data-box pa-10">
                         <div class="container-fluid">
-
+    <div id="div-alerta-success" class="d-none alert alert-success">
+    	<span>Permisos modificados</span>
+    </div>
         <?php $message = $this->session->flashdata('mensajeSuccess'); ?>
             <?php if($message){ ?>
               <div class="alert alert-success">
@@ -71,9 +72,9 @@ $botonCrear = "Registrar Especialidad";
                             <table id="tbLista" class="table table-bordered table-sm">
                               <thead>
                                 <tr>
-                                  <th class="text-center">Profesi&oacute;n</th>
+                                  <th class="text-center">Evento Tipo</th>
                                   <th class="text-center">C&oacute;digo</th>
-                                  <th class="text-center">Especialidad</th>
+                                  <th class="text-center">Nombre</th>
                                   <th>&nbsp;</th>
                                   <th>&nbsp;</th>
                                   <th>&nbsp;</th>
@@ -81,27 +82,25 @@ $botonCrear = "Registrar Especialidad";
                               </thead>
                               <tbody>
                               <?php
-                                if ($listar->num_rows() > 0) {
-                                foreach ($listar->result() as $row) :
+                                if ($lista->num_rows() > 0) {
+                
+                                foreach ($lista->result() as $row) :
                                     ?>
                               <tr>
-                                  <td align="center"><?=$row->profesion?></td>
-                                  <td align="center"><?=$row->id?></td>
-                                  <td align="center"><?=$row->especialidad?></td>
-
+                                  <td align="center"><?=$row->Evento_Tipo_Nombre?></td>
+                                  <td align="center"><?=$row->Evento_Codigo?></td>
+                                  <td align="center"><?=$row->Evento_Nombre?></td>
                                   <td align="center">
                                     <button class="btn btn-warning btn-circle actionEdit" title="EDITAR" type="button">
                                       <i class="fa fa-pencil-square-o"></i>
                                     </button>
                                   </td>
-
                                   <td align="center">
                                     <button class="btn btn-danger btn-circle actionDelete" title="ELIMINAR" type="button">
                                       <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
                                   </td>
-                                  <td align="center"><?=$row->brigadistas_profesiones_id?></td>
-
+                                  <td align="center"><?=$row->Evento_Tipo_Codigo?></td>
                                 </tr>
                                   <?php
                                     endforeach;
@@ -126,19 +125,19 @@ $botonCrear = "Registrar Especialidad";
   <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
     aria-labelledby="deleteModalLabel">
     <div class="modal-dialog" role="document">
-      <form id="formEliminar" action="<?=base_url()?>tablas/brigadistas-especialidad-eliminar" method="POST">
-        <input type="hidden" name="id" value="" readonly />
-        <input type="hidden" name="brigadistas_profesiones_id" value="" readonly />
+      <form id="formEliminar" action="<?=base_url()?>tablas/main/evento-eliminar" method="POST">
+        <input type="hidden" name="Evento_Tipo_Codigo" value="" readonly />
+        <input type="hidden" name="Evento_Codigo" value="" readonly />
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"
               aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h5 class="modal-title">Eliminar Brigadista Especialidad</h5>
+            <h5 class="modal-title">Eliminar Evento</h5>
           </div>
           <div class="modal-body">
-            &iquest;Seguro(a) desea Borrar la especialidad <strong id="elementoEliminar"></strong>?
+            &iquest;Seguro(a) desea Borrar el evento <strong id="elementoEliminar"></strong>?
           </div>
           <div class="modal-footer">
             <button type="reset" class="btn btn-basic" data-dismiss="modal">Cerrar</button>
@@ -156,21 +155,22 @@ $botonCrear = "Registrar Especialidad";
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5 class="modal-title" id="registrarTableroModalLabel">Registrar Brigadista Especialidad</h5>
+          <h5 class="modal-title" id="registrarTableroModalLabel">Registrar Evento</h5>
         </div>
-        <form id="formRegistrar" name="formRegistrar" action="<?=base_url()?>tablas/brigadistas-especialidad-gestionar" method="POST">
+        <form id="formRegistrar" name="formRegistrar" action="<?=base_url()?>tablas/main/evento-gestionar" method="POST">
           <div class="modal-body">
-			<input type="hidden" name="id" value="" readonly />
+			<input type="hidden" name="Evento_Codigo" value="" readonly />
+			<input type="hidden" name="Evento_Tipo_Codigo" value="" readonly />
             <div class="row">
               <div class="col-xs-12">
                 <div class="form-group">
-                  <label class="">Profesi&oacute;n</label> 
-				  <select class="form-control" name="brigadistas_profesiones_id" tabindex="-1">
+                  <label class="">Tipo del Evento</label> 
+				  <select class="form-control" name="Codigo_Tipo_Evento">
 				  	<option value="">[Seleccione]</option>
-				  	<?php if($profesiones->num_rows() > 0) {
-				  	     foreach($profesiones->result() as $row):
+				  	<?php if($listaTipoEventos->num_rows() > 0) {
+				  	         foreach($listaTipoEventos->result() as $row):
 				  	    ?>
-				  	<option value="<?=$row->id?>"><?=$row->profesion?></option>
+				  	<option value="<?=$row->Evento_Tipo_Codigo?>"><?=$row->Evento_Tipo_Nombre?></option>
 				  	<?php 
 				  	         endforeach;
 				  	} ?>
@@ -179,8 +179,8 @@ $botonCrear = "Registrar Especialidad";
               </div>
               <div class="col-xs-12">
                 <div class="form-group">
-                  <label class="">Nombre Especialidad</label> 
-				  <input type="text" class="form-control text-uppercase" name="especialidad" />
+                  <label class="">Nombre del Evento</label> 
+				  <input type="text" class="form-control text-uppercase" name="Evento_Nombre" />
                 </div>
               </div>
             </div>
@@ -193,9 +193,9 @@ $botonCrear = "Registrar Especialidad";
       </div>
     </div>
   </div>
-  <script src="<?=base_url()?>public/js/tablas/brigadista-especialidad.js?v=<?=date("s")?>"></script>
+  <script src="<?=base_url()?>public/js/tablas/eventos.js?v=<?=date("s")?>"></script>
   <script>
-      brigadistaEspecialidad("<?=base_url()?>");
-  </script>
+	eventos("<?=base_url()?>");
+</script>
 </body>
 </html>
